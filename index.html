@@ -3,212 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hero Wars Alliance — База Гайдов</title>
-    <!-- Подключение иконок -->
-    <link rel="stylesheet" href="https://cloudflare.com">
+    <title>Hero Wars Alliance — Гайды</title>
+    
+    <!-- Стили сайта -->
     <style>
-        :root {
-            --bg-color: #0b0c10;
-            --secondary-bg: #1f2833;
-            --accent-color: #ff4a4a;
-            --accent-hover: #ff6b6b;
-            --text-color: #c5a880;
-            --text-light: #ffffff;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-light);
+            background-color: #0b0c10;
+            color: #ffffff;
             line-height: 1.6;
+            padding-bottom: 50px;
         }
 
-        /* Шапка сайта */
         header {
             background: linear-gradient(135deg, #1f2833 0%, #0b0c10 100%);
-            border-bottom: 3px solid var(--accent-color);
+            border-bottom: 3px solid #ff4a4a;
             padding: 40px 20px;
             text-align: center;
         }
 
         header h1 {
-            color: var(--accent-color);
+            color: #ff4a4a;
             font-size: 2.5rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 10px;
-            text-shadow: 0 0 10px rgba(255, 74, 74, 0.5);
         }
 
         header p {
-            color: var(--text-color);
+            color: #c5a880;
             font-size: 1.1rem;
         }
 
-        /* Главный контейнер */
         .container {
             max-width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
         }
 
-        /* Сетка категорий */
-        .grid {
+        /* Кнопки переключения страниц */
+        .tabs-menu {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .tab-button {
+            background-color: #151b23;
+            color: #ffffff;
+            border: 1px solid #2e3c4e;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button:hover {
+            border-color: #ff4a4a;
+            color: #ff4a4a;
+        }
+
+        .tab-button.active {
+            background-color: #ff4a4a;
+            color: #ffffff;
+            border-color: #ff4a4a;
+        }
+
+        /* Блоки с контентом */
+        .tab-block {
+            display: none;
+        }
+
+        .tab-block.active {
+            display: block;
+        }
+
+        /* Сетка для карточек */
+        .grid-layout {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
-        /* Стильная карточка гайда */
-        .card {
-            background-color: var(--secondary-bg);
+        .guide-card {
+            background-color: #1f2833;
             border-radius: 10px;
             overflow: hidden;
             border: 1px solid #2e3c4e;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(255, 74, 74, 0.2);
-            border-color: var(--accent-color);
-        }
-
-        .card-header {
-            background: linear-gradient(90deg, #2e3c4e, #1f2833);
-            padding: 20px;
-            font-size: 1.3rem;
+        .card-title {
+            background-color: #2e3c4e;
+            padding: 15px 20px;
+            font-size: 1.2rem;
             font-weight: bold;
-            color: var(--text-color);
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            color: #c5a880;
             border-bottom: 1px solid #2e3c4e;
         }
 
-        .card-header i {
-            color: var(--accent-color);
-        }
-
-        .card-body {
+        .card-content {
             padding: 20px;
-            flex-grow: 1;
         }
 
-        .card-body ul {
+        /* Рамка для картинок */
+        .image-box {
+            width: 100%;
+            height: 180px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #2e3c4e;
+            background-color: #11141a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .placeholder-text {
+            color: #4f6174;
+            font-size: 0.9rem;
+        }
+
+        /* Ссылки на гайды */
+        .links-list {
             list-style: none;
         }
 
-        .card-body li {
+        .links-list li {
             margin-bottom: 12px;
-            padding-left: 15px;
+            padding-left: 20px;
             position: relative;
         }
 
-        .card-body li::before {
+        .links-list li::before {
             content: "✦";
-            color: var(--accent-color);
+            color: #ff4a4a;
             position: absolute;
             left: 0;
         }
 
-        .card-body a {
-            color: var(--text-light);
+        .links-list a {
+            color: #ffffff;
             text-decoration: none;
-            transition: color 0.2s;
+            font-size: 1rem;
         }
 
-        .card-body a:hover {
-            color: var(--accent-hover);
+        .links-list a:hover {
+            color: #ff6b6b;
+            text-decoration: underline;
         }
 
-        /* Футер */
         footer {
             text-align: center;
             padding: 30px;
             margin-top: 60px;
-            background-color: #050608;
-            color: #555;
+            color: #555555;
             font-size: 0.9rem;
             border-top: 1px solid #1f2833;
-        }
-
-        /* Адаптивность для мобилок */
-        @media (max-width: 600px) {
-            header h1 { font-size: 1.8rem; }
-            .container { margin: 20px auto; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Шапка -->
     <header>
         <h1>Hero Wars Alliance</h1>
-        <p>Лучшие гайды, тир-листы и тактики для сокрушения врагов</p>
+        <p>База лучших гайдов и тактик</p>
     </header>
 
     <div class="container">
-        <div class="grid">
-            
-            <!-- Карточка 1 -->
-            <div class="card">
-                <div class="card-header">
-                    <i class="fa-solid fa-fire"></i>
-                    <span>Тир-Листы Героев</span>
-                </div>
-                <div class="card-body">
-                    <ul>
-                        <li><a href="#">Лучшие танки в текущей мета-игре</a></li>
-                        <li><a href="#">Топ-маги для нанесения взрывного урона</a></li>
-                        <li><a href="#">Саппорты, которые нужны в каждую пачку</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Карточка 2 -->
-            <div class="card">
-                <div class="card-header">
-                    <i class="fa-solid fa-users"></i>
-                    <span>Лучшие Пачки (Команды)</span>
-                </div>
-                <div class="card-body">
-                    <ul>
-                        <li><a href="#">Физические команды через Исмаила</a></li>
-                        <li><a href="#">Магические сборки с Олафом и Безликим</a></li>
-                        <li><a href="#">Анти-мета сборки для Арены</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Карточка 3 -->
-            <div class="card">
-                <div class="card-header">
-                    <i class="fa-solid fa-gem"></i>
-                    <span>Прокачка и Ресурсы</span>
-                </div>
-                <div class="card-body">
-                    <ul>
-                        <li><a href="#">Как правильно тратить изумруды</a></li>
-                        <li><a href="#">Приоритет прокачки обликов и артефактов</a></li>
-                        <li><a href="#">Гайд по питомцам: кого качать первым?</a></li>
-                    </ul>
-                </div>
-            </div>
-
+        
+        <!-- Меню выбора вкладок -->
+        <div class="tabs-menu">
+            <button class="tab-button active" onclick="switchTab('heroes-tab', this)">Герои</button>
+            <button class="tab-button" onclick="switchTab('titans-tab', this)">Титаны</button>
         </div>
+
+        <!-- СТРАНИЦА: ГЕРОИ -->
+        <div id="heroes-tab" class="tab-block active">
+            <div class="grid-layout">
+                
+                <div class="guide-card">
+                    <div class="card-title">Тир-Лист и Мета</div>
+                    <div class="card-content">
+                        <div class="image-box">
+                            <!-- Картинка появится, как только ты добавишь её в папку images/meta.jpg -->
+                            <img src="images/meta.jpg" alt="" onerror="this.style.display='none';">
+                            <span class="placeholder-text">[ Место для картинки images/meta.jpg ]</span>
+                        </div>
+                        <ul class="links-list">
+                            <li><a href="#">Лучшие танки текущего сезона</a></li>
+                            <li><a href="#">Топ-маги для быстрого сноса пачек</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-card">
+                    <div class="card-title">Лучшие Пачки Арены</div>
+                    <div class="card-content">
+                        <div class="image-box">
+                            <img src="images/fight.gif" alt="" onerror="this.style.display='none';">
+                            <span class="placeholder-text">[ Место для гифки images/fight.gif ]</span>
+                        </div>
+                        <ul class="links-list">
+                            <li><a href="#">Физическая пачка через Данте</a></li>
+                            <li><a href="#">Магический сетап через Амиру</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- СТРАНИЦА: ТИТАНЫ -->
+        <div id="titans-tab" class="tab-block">
+            <div class="grid-layout">
+                
+                <div class="guide-card">
+                    <div class="card-title">Прокачка Титанов</div>
+                    <div class="card-content">
+                        <div class="image-box">
+                            <img src="images/titans.jpg" alt="" onerror="this.style.display='none';">
+                            <span class="placeholder-text">[ Место для скриншота images/titans.jpg ]</span>
+                        </div>
+                        <ul class="links-list">
+                            <li><a href="#">Приоритет прокачки супертитанов</a></li>
+                            <li><a href="#">Сборка команды Земли против Воды</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 
     <footer>
-        <p>&copy; 2026 База Гайдов Hero Wars. Сайт создан фанатами для фанатов.</p>
+        <p>&copy; 2026 База Гайдов Hero Wars Alliance.</p>
     </footer>
+
+    <!-- Скрипт переключения вкладок -->
+    <script>
+        function switchTab(tabId, buttonElement) {
+            // Скрываем все блоки страниц
+            var blocks = document.getElementsByClassName('tab-block');
+            for (var i = 0; i < blocks.length; i++) {
+                blocks[i].classList.remove('active');
+            }
+
+            // Деактивируем все кнопки
+            var buttons = document.getElementsByClassName('tab-button');
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+            }
+
+            // Включаем нужный блок и кнопку
+            document.getElementById(tabId).classList.add('active');
+            buttonElement.classList.add('active');
+        }
+    </script>
 
 </body>
 </html>
